@@ -1,0 +1,65 @@
+<h2>To-do list</h2>
+<form [formGroup]="listForm" novalidate>
+  <div formArrayName="items">
+    <div *ngFor="let item of items.controls; let i=index " [formGroupName]="i" >
+      <span>{{i + 1}}. </span>
+      <label>
+        Completed:
+        <input type="checkbox" formControlName="completed">
+      </label>
+  
+      <label>Action:
+        <input formControlName="action" ><!--required-->
+      </label> 
+      
+      <span *ngIf="item.invalid && (item.dirty || item.touched)" class="red">
+        <span *ngIf="item.hasError('required', 'action')">
+          Action is required.
+        </span>
+        <span *ngIf="item.hasError('minlength', 'action')">
+          Action must be at least 4 characters long.
+        </span>
+        <span *ngIf="item.hasError('maxLength', 'action')">
+          Action must be no more than 225 characters.
+        </span>
+      </span>
+
+      <label>Description:
+        <input formControlName="description" ><!--required-->
+      </label>
+
+      <span *ngIf="item.invalid && (item.dirty || item.touched)" class="red">
+        <span *ngIf="item.hasError('required', 'description')">
+          Description is required.
+        </span>
+        <span *ngIf="item.hasError('minlength', 'description')">
+          Description must be at least 4 characters long.
+        </span>
+        <span *ngIf="item.hasError('maxLength', 'description')">
+          Description must be no more than 225 characters.
+        </span>
+      </span>
+
+      <span>Priority:</span>
+      <label><input type="radio" formControlName="priority" value="low">Low</label>
+      <label><input type="radio" formControlName="priority" value="high">High</label>
+    
+      <button (click)="removeToDo(i)" type="button">Delete Item</button>
+
+      </div>
+    </div>
+
+    <button (click)="addToDo()" type="button">Add a new Item</button>
+    <button (click)="showCompleted()" type="button">Show completed cases</button>
+    <button (click)="showPriority()" type="button">Show important business</button>
+    <button (click)="showAll()" type="button">Show all entries</button>
+
+</form>
+<!-- для тестирования, потом убрать  -->
+<!-- <div>ITEM STATUS: {{item.status}}</div>
+      <div>ITEM VALID: {{item.valid}}</div>-->
+<!--<p>Form value: {{ listForm.value | json }}</p>
+<p>Form status: {{ listForm.status | json }}</p>
+<div>Form status: {{listForm.get('items').valid}}</div>
+<p>Action: {{ listForm.controls.items.value[0].action }}</p>
+<div>Action: {{items.controls[0].value.action}}</div>-->

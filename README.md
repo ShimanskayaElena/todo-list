@@ -1,4 +1,6 @@
-# Task1
+# Todo List (task 1)
+
+The demo version of this application can be seen from the link - https://shimanskayaelena.github.io/todo-list/
 
 To run the application, you must run it on the command line
 
